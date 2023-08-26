@@ -26,18 +26,18 @@ const strangeArray = [
 
 
 document.addEventListener("DOMContentLoaded", (e) => {
- 
   function showList(array) {
     const container = document.getElementById("list");
     container.innerHTML = "";
     
-    array.forEach((element) => {
-      if (typeof element === "string") { 
-        const li = document.createElement("li");
-        li.appendChild(document.createTextNode(element));
-        container.appendChild(li);
-      }
+    const filteredStrings = array.filter(element => typeof element === "string");
+    const sortedStrings = filteredStrings.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+
+    sortedStrings.forEach((element) => {
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(element));
+      container.appendChild(li);
     });
-  }
+  } 
   showList(strangeArray);
 });
